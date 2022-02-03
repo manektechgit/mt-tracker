@@ -1,0 +1,104 @@
+<div class="container-fluid">
+  <div class="row top-bar">
+    <div class="col-lg-8">
+      <div class="d-flex align-items-center justify-content-between">
+        <ul class="breadcrumbs">
+          <li><a [routerLink]="['/user']" title="Dashboard">Dashboard</a></li>
+          <li><span>Profile</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- View Div End-->
+  <div class="col-lg-12">
+    <div class="card admin-profile bg-light shadow mb-4" style="height: 500px;margin-top: 20px;">
+      <div class="d-sm-flex justify-content-between">
+        <div class="userinfo" style="margin-top: 50px;margin-left: 20px;">
+          <form class="form_common_style" (ngSubmit)="onSubmit()" [formGroup]="userMasterForm">
+            <div class="row">
+              <div class="col-4">
+                <label>Name</label>
+                <input type="text" formControlName="FirstName" class="form-control form-input"
+                  placeholder="Enter your firstname">
+                <div class="text-danger"
+                  *ngIf="f.FirstName.invalid && (f.FirstName.dirty || f.FirstName.touched || isSubmit)">
+                  <span *ngIf="f.FirstName.errors.required">
+                    Please enter your firstname
+                  </span>
+                </div>
+              </div>
+
+              <!-- <div class="col-4">
+                <label>Last name</label>
+                <input type="text" formControlName="LastName" class="form-control form-input"
+                  placeholder="Enter your LastName">
+                <div class="text-danger"
+                  *ngIf="f.LastName.invalid && (f.LastName.dirty || f.LastName.touched || isSubmit)">
+                  <span *ngIf="f.LastName.errors.required">
+                    Please enter your lastname
+                  </span>
+                </div>
+              </div> -->
+
+              <div class="col-xl-4">
+                <label>Email address</label>
+                <input type="text" formControlName="Email" readonly class="form-control form-input"
+                  placeholder="Enter your email address">
+                <div class="text-danger" *ngIf="f.Email.invalid && (f.Email.dirty || f.Email.touched || isSubmit)">
+                  <span *ngIf="f.Email.errors.required">
+                    Please enter your email
+                  </span>
+                  <span *ngIf="f.Email.errors?.pattern">
+                    Please provide a valid email address
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-xl-4">
+                <label>Gender</label>
+                <select class="form-control form-input" formControlName="Gender" name="Gender" required>
+                  <option [value]=null>-- Select --</option>
+                  <option *ngFor="let dropdown of Genders" [value]="dropdown.value">
+                    {{dropdown.name}}
+                  </option>
+                </select>
+              </div>
+
+
+              <div class="col-xl-4 mt-3">
+                <label>New password</label>
+                <input type="password" formControlName="Password" class="form-control form-input" id="newPassword"
+                  placeholder="Password">
+                <span (click)="show()">
+                  <img src="https://i.stack.imgur.com/Oyk1g.png" id="EYE"
+                    style="margin-top: -35px;float: right;margin-right: 18px;cursor: pointer;">
+                  </span>
+                <app-password-strength class="password-policy-admin" *ngIf="f.Password.errors?.pattern || f.Password.errors?.maxlength"
+                  [passwordToCheck]="this.userMasterForm.value.Password">
+                </app-password-strength>
+              </div>
+
+              <div class="col-xl-4 mt-3">
+                <label>confirm password</label>
+                <input type="password" formControlName="ConfirmPassword" class="form-control form-input"
+                  id="confirmPassword" placeholder="Confirm Password">
+                  <span (click)="showConfirm()"><img src="https://i.stack.imgur.com/Oyk1g.png" id="EYEC"
+                      style="margin-top: -35px;float: right;margin-right: 18px;cursor: pointer;">
+                  </span>
+                <div class="text-danger" *ngIf="this.userMasterForm.hasError('passwordNotMatch')" style="bottom: 0px;">
+                  <span *ngIf="userMasterForm.hasError('passwordNotMatch')">
+                    Password and Confirm Password doesn't match
+                  </span>
+                </div>
+              </div>
+              <div class="col-12 text-md-right" style="margin-top: 100px;">
+                <button class="btn submit-btn" style="margin: 3px;" type="submit">Update detail</button> &nbsp;
+                <button class="btn cancel-btn" style="margin: 3px;" type="button" (click)="btnClick()">Cancel</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

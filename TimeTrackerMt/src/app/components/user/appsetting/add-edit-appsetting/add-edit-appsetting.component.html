@@ -1,0 +1,103 @@
+<div class="row">
+  <div class="col-lg-10">
+    <div class="card admin-profile bg-light shadow mb-4">
+      <div class="d-sm-flex justify-content-between">
+        <div class="userinfo">
+          <form class="form_common_style" (ngSubmit)="onSubmit()" name="AppSettingForm" [formGroup]="AppSettingForm">
+            <div class="row">
+              <div class="col-12">
+                <label>Parameter</label>
+                <input *ngIf="addEditMode != 'edit'" formControlName="Parameter" name="Parameter" id="inputParameter"
+                  class="form-control form-input ng-pristine ng-invalid ng-touched" placeholder="Parameter">
+                <input *ngIf="addEditMode === 'edit'" formControlName="Parameter" name="Parameter" id="inputParameter"
+                  class="form-control form-input ng-pristine ng-invalid ng-touched" placeholder="Parameter" readonly>
+                <div class="text-danger"
+                  *ngIf="f.Parameter.invalid && (f.Parameter.dirty || f.Parameter.touched || isSubmit)">
+                  <span *ngIf="f.Parameter.errors.required">
+                    Please enter parameter
+                  </span>
+                </div>
+                <span *ngIf="f.Parameter.errors?.pattern" class="text-danger">
+                  Special characters and number are not allowed
+                </span>
+              </div>
+              <div class="col-12">
+                <label>Parameter value</label>
+                <input formControlName="ParameterValue" name="ParameterValue" id="inputParameterValue"
+                  class="form-control form-input ng-pristine ng-invalid ng-touched" placeholder="Parameter value">
+                <div class="text-danger"
+                  *ngIf="f.ParameterValue.invalid && (f.ParameterValue.dirty || f.ParameterValue.touched || isSubmit)">
+                  <span *ngIf="f.ParameterValue.errors.required">
+                    Please enter parametervalue
+                  </span>
+                </div>
+                <span *ngIf="f.ParameterValue.errors?.pattern" class="text-danger">
+                  Special characters are not allowed
+                </span>
+              </div>
+              <div class="col-12">
+                <label>Category</label>
+                <input formControlName="Category" name="Category" id="inputCategory"
+                  class="form-control form-input ng-pristine ng-invalid ng-touched" placeholder="Category">
+                <div class="text-danger"
+                  *ngIf="f.Category.invalid && (f.Category.dirty || f.Category.touched || isSubmit)">
+                  <span *ngIf="f.Category.errors.required">
+                    Please enter category
+                  </span>
+                </div>
+                <span *ngIf="f.Category.errors?.pattern" class="text-danger">
+                  Special characters and number are not allowed
+                </span>
+              </div>
+              <div class="col-12">
+                <label>Description</label>
+                <input formControlName="Description" name="Description" id="inputDescription"
+                  class="form-control form-input ng-pristine ng-invalid ng-touched" placeholder="Description">
+                <div class="text-danger"
+                  *ngIf="f.Description.invalid && (f.Description.dirty || f.Description.touched || isSubmit)">
+                  <span *ngIf="f.Description.errors.required">
+                    Please enter description
+                  </span>
+                </div>
+                <span *ngIf="f.Description.errors?.pattern" class="text-danger">
+                  Special characters and number are not allowed
+                </span>
+              </div>
+              <div class="col-12">
+                <label>Display Order</label>
+                <input type="number" formControlName="DisplayOrder" name="DisplayOrder" id="inputDisplayOrder" min="0"
+                  class="form-control form-input ng-pristine ng-invalid ng-touched" placeholder="Display order" (input)="checkValue($event)">
+                <div class="text-danger"
+                  *ngIf="f.DisplayOrder.invalid && (f.DisplayOrder.dirty || f.DisplayOrder.touched || isSubmit)">
+                  <span *ngIf="f.DisplayOrder.errors.required">
+                    Please enter displayorder
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <label>Display Name</label>
+                <input  formControlName="DisplayName" name="DisplayName" id="inputDisplayOrder"
+                  class="form-control form-input ng-pristine ng-invalid ng-touched" placeholder="Display name">
+                <div class="text-danger"
+                  *ngIf="f.DisplayName.invalid && (f.DisplayName.dirty || f.DisplayName.touched || isSubmit)">
+                  <span *ngIf="f.DisplayName.errors.required">
+                    Please enter displayname
+                  </span>
+                </div>
+                <span *ngIf="f.DisplayName.errors?.pattern" class="text-danger">
+                  Special characters and number are not allowed
+                </span>
+              </div>
+
+              <div class="col-12 mt-3">
+                <button class="btn submit-btn" style="margin: 3px;" type="submit">Save</button> &nbsp;
+                <button class="btn cancel-btn" style="margin: 3px;" type="button" (click)="onSaveOrCancel('cancel')">Cancel</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

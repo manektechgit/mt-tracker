@@ -1,0 +1,78 @@
+<!-- <div class="container" *ngIf="isError">
+  <p-card>
+    <div class="row" *ngIf="isError">
+      <div class="col-12">
+        <span class="text-danger" *ngIf="isError" [innerHTML]="errorMessage">
+        </span>
+      </div>
+    </div>
+  </p-card>
+</div> -->
+
+<form class="form_common_style" [formGroup]="InviteForm" (ngSubmit)="onSubmit()">
+  <div formArrayName="employees">
+    <div class="container">
+      <p-card>
+        <div class="row" *ngFor="let employee of employees().controls; let i=index" [formGroupName]="i">
+          <div class="col-4 mt-3">
+            <label>Email<span>*</span></label>
+            <input formControlName="email" type="text" class="form-control form-input" placeholder="Enter email">
+            <div class="text-danger"
+              *ngIf="employee.get('email').invalid && (employee.get('email').dirty || employee.get('email').touched || isSubmit)">
+              <span *ngIf="employee.get('email').hasError('required')">
+                Please enter email
+              </span>
+              <span *ngIf="employee.get('email').hasError('pattern')">
+                Please provide a valid email address
+              </span>
+            </div>
+            <div class="text-danger" *ngIf="employee.get('email').hasError('isEmailExist')">
+              Email already exist
+            </div>
+          </div>
+
+          <div class="col-3 mt-3">
+            <label>Name<span>*</span></label>
+            <input formControlName="name" type="text" class="form-control form-input" placeholder="Enter name">
+            <div class="text-danger"
+              *ngIf="employee.get('name').invalid && (employee.get('name').dirty || employee.get('name').touched || isSubmit)">
+              Please enter name
+            </div>
+          </div>
+
+
+
+          <div class="col-4 mt-3">
+            <label>Role <span>*</span></label><br>
+            <div class="form-check-inline" *ngFor="let dropdown of dropDownRole;let ix=index">
+              <label class="form-check-label" for="inlineRadio{{i}}{{ix}}">
+                <input type="radio" id="inlineRadio{{i}}{{ix}}" class="form-check-input" formControlName="role"
+                  [value]="dropdown.RoleId">{{dropdown.RoleName}}
+              </label>
+            </div>
+          </div>
+
+          <div class="col-1">
+            <button *ngIf="i !== 0" class="btn btn-danger" type="button"
+              (click)="removeEmployee(i)">
+              <i class="far fa-trash-alt DeleteIcon mr-2" style="cursor: pointer; margin-left: 6px;"  title="Delete"></i>
+              </button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 addEmployees">
+            <button class="btn btn-success btn-sm" type="button" (click)="addNewEmployee()">+ Add More Employees</button>
+          </div>
+          <div class="col-12 mt-3">
+            <button class="btn btn-warning btn-sm" type="button" (click)="skipStep()">Skip Step</button>
+          </div>
+
+          <div class="col-12">
+            <button class="btn submit-btn" id="btnInviteTeam" type="submit" title="Save">Invite Your Team</button>
+          </div>
+        </div>
+      </p-card>
+    </div>
+  </div>
+</form>

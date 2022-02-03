@@ -1,0 +1,81 @@
+<div class="row">
+    <div class="col-lg-10">
+        <div class="card admin-profile bg-light shadow mb-4">
+            <div class="d-sm-flex justify-content-between">
+                <div class="userinfo">
+                    <form class="form_common_style" (ngSubmit)="onSubmit()" name="CardForm" [formGroup]="CardForm">
+                        <div class="row">
+                            <div class="col-8 mt-3">
+                                <label>Full Name<span>*</span></label>
+                                <input type="text" formControlName="FullName" class="form-control form-input"
+                                    placeholder="Enter full name">
+                                <div class="text-danger"
+                                    *ngIf="f.FullName.invalid && (f.FullName.dirty || f.FullName.touched || isSubmit)">
+                                    <span *ngIf="f.FullName.errors.required">
+                                        Please enter full name
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="col-8 mt-3">
+                                <label>Card Number<span>*</span></label>
+                                <input type="text" formControlName="CardNumber" class="form-control form-input"
+                                    placeholder="Enter card number">
+                                <div class="text-danger"
+                                    *ngIf="f.CardNumber.invalid && (f.CardNumber.dirty || f.CardNumber.touched || isSubmit)">
+                                    <span *ngIf="f.CardNumber.errors.required">
+                                        Please enter card number
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="col-8 mt-3">
+                                <label>Expiry Date<span>*</span></label>
+                                <input type="text" formControlName="CardExpiryDate" class="form-control form-input"
+                                    placeholder="Enter expiry date">
+                                <div class="text-danger"
+                                    *ngIf="f.CardExpiryDate.invalid && (f.CardExpiryDate.dirty || f.CardExpiryDate.touched || isSubmit)">
+                                    <span *ngIf="f.CardExpiryDate.errors.required">
+                                        Please enter expiry date
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="col-8 mt-3">
+                                <label>CVC<span>*</span></label>
+                                <input type="text" formControlName="CardCVC" class="form-control form-input"
+                                    placeholder="Enter CVC">
+                                <div class="text-danger"
+                                    *ngIf="f.CardCVC.invalid && (f.CardCVC.dirty || f.CardCVC.touched || isSubmit)">
+                                    <span *ngIf="f.CardCVC.errors.required">
+                                        Please enter CVC
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="col-8 mt-3">
+                                <label>Zip/Postal Code<span>*</span></label>
+                                <input type="text" formControlName="PostalCode" class="form-control form-input"
+                                    placeholder="Enter postal code">
+                                <div class="text-danger"
+                                    *ngIf="f.PostalCode.invalid && (f.PostalCode.dirty || f.PostalCode.touched || isSubmit)">
+                                    <span *ngIf="f.PostalCode.errors.required">
+                                        Please enter postal code
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="col-12 mt-3">
+                                <button class="btn submit-btn" style="margin: 3px;" type="submit"
+                                    title="Save">Save</button> &nbsp;
+                                <button class="btn cancel-btn" style="margin: 3px;" type="button"
+                                    (click)="onSaveOrCancel('cancel')" title="Cancel">Cancel</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

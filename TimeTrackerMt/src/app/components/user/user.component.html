@@ -1,0 +1,21 @@
+<div class="main admin-content" [ngClass]="showMenuBar ? 'toggled' : ''">
+  <app-login-user-header (togleHeader)="ToggleHeader($event)" [isHeaderShow]="showSideBar"
+    (togleMenu)="ToggleMenu($event)" [isMenuShow]="showMenuBar"></app-login-user-header>
+  <div class="main-sidebar" [ngClass]="showSideBar ? 'show' : ''">
+    <ul class="sidebar-menu">
+      <li *ngFor="let item of dynamicmenulist;">
+        <a routerLink="{{item.page_name}}" routerLinkActive="active">
+          <i [ngClass]="GetIconClass(item.Icon)"></i>
+          <span *ngIf="!showMenuBar"> {{item.name}}</span></a>
+      </li>
+      <li><a target="_blank" [href]="exePath" download>
+          <i class="fas fa-download"></i>
+          <span>Download Tracker</span></a>
+      </li>
+    </ul>
+  </div>
+  <div class="content-wrapper" (click)="CloseSideBar()">
+    <router-outlet></router-outlet>
+  </div>
+  <app-login-user-footer></app-login-user-footer>
+</div>

@@ -1,0 +1,62 @@
+<div class="card" >
+  <p-toolbar >
+    <ng-template pTemplate="left" [formGroup]="ReportsForm">
+     <!--For User-->
+        <div  class="UserMain box-main" *ngIf="currentLoginUser?.RoleId===2 || currentLoginUser?.RoleId===5 || currentLoginUser?.RoleId===6">
+            <label class="itemLbl" >Users</label>
+            <p-multiSelect   (onChange)="onUserSelect($event.value)"
+            [options]="userDropdownList" formControlName="selectedUsers"
+            defaultLabel="Select a User"  optionLabel="FirstName"></p-multiSelect>
+        </div>
+
+      <!--For Date Range-->
+    <div  class="DateRange">
+        <label for="range" class="itemLbl">Range</label>
+        <p-calendar  class="Range" (onSelect)="onSelectRange($event)" dateFormat="dd-M-yy"  formControlName="rangeDates"
+         selectionMode="range"  [readonlyInput]="true"></p-calendar>
+    </div>
+
+    <div  class="DateRange">
+      <label for="Download" class="itemLbl" style="margin-left: 22px;">Download</label>
+    <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success "  pTooltip="XLS" tooltipPosition="bottom"></button>
+  </div>
+
+   </ng-template>
+  </p-toolbar>
+  <br>
+      <p-tabView>
+      <p-tabPanel header="Summary" *ngIf="showTabs && showTabs['one']">
+        <div class="table-responsive">
+        <p-table [columns]="reportsMasterList" [value]="reportsMasterList" id="Datatable" selectionMode="multiple"  #dt styleClass="p-datatable-sm" [lazy]="true"
+          [globalFilterFields]="['User Name','Total Working Day','Present Days']">
+          <ng-template pTemplate="caption">
+            User - Report
+            <!-- <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success "  pTooltip="XLS" tooltipPosition="bottom"></button> -->
+
+          </ng-template>
+          <ng-template pTemplate="header">
+                  <tr>
+                    <th width="15%">User Name</th>
+                    <th width="15%">Total Working Day</th>
+                    <th width="10%">Present Days</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product >
+                  <tr>
+                    <td> {{product.FirstName}}</td>
+                    <td> {{product.TotalWorkingDay}}</td>
+                    <td> {{product.PresentDays}}</td>
+                  </ng-template>
+                </p-table>
+              </div>
+    </p-tabPanel>
+
+
+    <!-- Report-Summary View -->
+    <p-tabPanel header="Detail" *ngIf="showTabs && showTabs['three']">
+      <app-report-detail [ReportsDetailsList]="reportDetailList" [GetUserDetailslist]="GetUserDetailsDatalist"></app-report-detail>
+    </p-tabPanel>
+
+      </p-tabView>
+
+      </div>

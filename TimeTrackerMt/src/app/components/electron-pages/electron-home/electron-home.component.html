@@ -1,0 +1,57 @@
+<div class="main">
+  <div class="container">
+    <div class="home-content-electron">
+      <div class="row" [ngStyle]="{'background-color': isConnected ? 'white' : 'red' }">
+        <div *ngIf="selectedTask" class="col mt-2">
+          {{selectedTask?.Name}} - {{selectedProject?.ProjectName}}
+        </div>
+        <div class="col-12 mt-2">
+          <div style="float: left;">
+            {{TotalWorkingHours}} hours today
+          </div>
+          <div style="float: right;">
+            {{this.showTimer}} <i class="far fa-clock"></i>
+          </div>
+        </div>
+        <hr>
+      </div>
+      <div class="row" [ngStyle]="{'background-color': isConnected ? 'white' : 'red' }">
+        <div class="col mt-2">
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col">
+          <input type="text" class="form-control" (keyup)="onkeyup($event)" placeholder="Search project and task" />
+        </div>
+      </div>
+      <div class=" row mt-2">
+        <div class="col-6">
+          <div *ngFor="let project of filterProjectList">
+            <div class="list-group">
+              <a href="javascript:void(0)" class="list-group-item list-group-item-action mt-2"
+                (click)="SetSelectedProject(project)"
+                [ngClass]="{'active': selectedProject?.ProjectId==project.ProjectId}">{{project.ProjectName}}</a>
+            </div>
+          </div>
+        </div>
+        
+        <div *ngIf="filterProjectTasks" class="col-6">
+          <div *ngFor="let task of filterProjectTasks">
+            <div class="list-group">
+              <div class="list-group-item list-group-item-action mt-2" (click)="SetSelectedProjectTask(task)">
+                <span class="mr-3"
+                  [ngClass]="{'text-success': selectedTask?.TaskId==task.TaskId && isStartTimer,'font-weight-bold' : selectedTask?.TaskId==task.TaskId && !isStartTimer}">{{task.Name}}</span>
+                <span class="badge badge-primary">{{task.ProjectName}}</span>
+                <span class="badge badge-primary" style="float: right;">{{task.TotalWorkingHours}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <button (click)="StartTimer(true)" class="btn_sub-electron" *ngIf="!isStartTimer && selectedTask">Start</button>
+      <button (click)="StopTimer(false)" class="btn_sub-electron" *ngIf="isStartTimer">Stop</button>
+    </div>
+  </div>
+</div>

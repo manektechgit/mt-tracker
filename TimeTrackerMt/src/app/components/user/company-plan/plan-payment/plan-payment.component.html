@@ -1,0 +1,37 @@
+<div class="card mb-5 mb-lg-0">
+  <div class="card-body">
+    <h5 class="card-title text-muted text-uppercase text-center">{{plan.Name}}</h5>
+    <h6 class="card-price text-center" id="costo1">
+      ${{ plan.AmountPerUser * noOfUser * (payType == "Annually" ? 12 : 1) }}
+    </h6>
+    <h5 class="card-title text-muted text-uppercase text-center">{{payType}}</h5>
+    <!-- <ngx-paypal [config]="payPalConfig" #payPalElem></ngx-paypal> -->
+    <a *ngIf="!pay" href="javascript:void(0)" (click)="paymentConfig()"
+      class="btn btn-block btn-primary text-uppercase">
+      {{ this.currentPlan ? (this.currentPlan.PlanId == plan.PlanId ? 'Current Plan' : 'Buy Plan') : 'Buy Plan'}}
+    </a>
+    <div #paypal></div>
+    <ul class="fa-ul">
+      <li *ngIf="plan.IsTimeTracking == true"><span class="fa-li"><i class="fas fa-check"></i></span>Time tracking
+      </li>
+      <li *ngIf="plan.IsTaskAndProject == true"><span class="fa-li"><i class="fas fa-check"></i></span>Tasks and
+        projects</li>
+      <li><span class="fa-li"><i class="fas fa-check"></i></span>Unlimited screenshots</li>
+
+      <li *ngIf="plan.NoOfSupportDays == 0"><span class="fa-li"><i class="fas fa-check"></i></span><b>24 hours</b>
+        support</li>
+      <li *ngIf="plan.NoOfSupportDays != 0"><span class="fa-li"><i
+            class="fas fa-check"></i></span><b>{{plan.NoOfSupportDays}} Days</b> support</li>
+
+      <li *ngIf="plan.NoOfDepartmentAllowed == 0"><span class="fa-li"><i
+            class="fas fa-check"></i></span><b>Unlimited</b> group/department</li>
+      <li *ngIf="plan.NoOfDepartmentAllowed != 0"><span class="fa-li"><i
+            class="fas fa-check"></i></span><b>{{plan.NoOfDepartmentAllowed}}</b> group/department</li>
+
+      <li *ngIf="plan.NoOfStorageMonth == 0"><span class="fa-li"><i class="fas fa-check"></i></span><b>Unlimited</b>
+        data storage</li>
+      <li *ngIf="plan.NoOfStorageMonth != 0"><span class="fa-li"><i
+            class="fas fa-check"></i></span><b>{{plan.NoOfStorageMonth}}</b> data storage</li>
+    </ul>
+  </div>
+</div>

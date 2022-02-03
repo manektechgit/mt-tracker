@@ -1,0 +1,18 @@
+<p-galleria [(value)]="images" [responsiveOptions]="responsiveOptions" [containerStyle]="{'max-width': '100%'}"
+    [numVisible]="5"
+    [circular]="true" [showItemNavigators]="true">
+    <ng-template pTemplate="item" let-item>
+        <img [src]="currentScreenShotDirectoryPath+item?.Image"  style="width: 100%; display: block;" />
+    </ng-template>
+
+    <ng-template pTemplate="thumbnail" let-item>
+        <div class="p-grid p-nogutter p-justify-center">
+            <img [src]="currentScreenShotDirectoryPath+item?.Image" style="display: block;" height="70px"/>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="caption" let-item>
+      <h4 style="margin-bottom: .5rem; color: #ffffff;">{{item?.CreationDate | date:'HH:mm dd MMM'}}</h4>
+  </ng-template>
+</p-galleria>
+
+

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>D:\MtTracker Publish</_PublishTargetUrl>
+    <History>True|2021-12-24T06:31:22.5444784Z;True|2021-12-24T12:00:58.4808526+05:30;True|2021-12-24T11:22:05.8134924+05:30;True|2021-12-09T10:42:03.6665389+05:30;True|2021-12-09T10:38:33.7710327+05:30;True|2021-12-07T15:22:53.2867896+05:30;True|2021-12-07T12:24:09.9996603+05:30;</History>
+  </PropertyGroup>
+</Project>

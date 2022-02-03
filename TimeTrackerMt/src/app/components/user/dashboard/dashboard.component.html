@@ -1,0 +1,97 @@
+
+
+<div class="card" >
+
+
+      <p-toolbar >
+        <div class="row">
+          <div style="margin-left: 37px">
+        <form class="form_common_style"  name="ReportsForm" [formGroup]="ReportsForm">
+
+                <div class="selecter" >
+                  <select class="form-control form-input"  (change)="onUserSelect()"  formControlName="UserId" name="UserId">
+                    <option [ngValue]=null>-- All --</option>
+                    <option *ngFor="let screencast of dropDownUsersList" [ngValue]="screencast.UserId">
+                      {{screencast.FirstName}}
+                    </option>
+                  </select>
+                </div>
+        </form>
+        </div>
+        <div class="tabmenu">
+          <p-tabMenu class="menuDetail" [model]="items" #tab [activeItem]="activeTab"  (click)="getActiveItem(tab?.activeItem)" ></p-tabMenu>
+          <p-calendar #calendar class="cal-margin" (onSelect)="onSelectRange($event)" dateFormat="dd-M-yy" formControlName="rangeDates"
+          selectionMode="range" showOn="button"  [readonlyInput]="true"></p-calendar>
+        </div>
+
+        </div>
+    </p-toolbar>
+
+</div>
+
+<div class="card">
+      <div class="row">
+          <div class="col">
+            Total time worked
+            <h4>
+              {{setTime(userData?.Total)}}
+            </h4>
+          </div>
+          <div class="col" >
+            Unproductive time
+            <h4>
+              {{setTime(userData?.UnProductive)}}
+            </h4>
+          </div>
+      </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-6">
+  <div class="card">
+    <div class="card-body row">
+          <h6>Worked most hours</h6>
+          <div class="col-12 pl-0 pr-0" *ngFor="let mostHR of UserMostWorkingHours">
+              <div *ngIf="mostHR != null" class="d-flex align-items-center">
+                <span class="name-pro">
+                    {{mostHR.UserName}}
+                  </span>
+                      <ngb-progressbar class="w-100 progress-bar-h" type="success" [value]="setProgreccbar(mostHR.WorkingHours)"></ngb-progressbar>
+                      <span class="hr-pro">
+                      {{setTime(mostHR.WorkingHours)}}
+                    </span>
+              </div>
+          </div>
+        </div>
+        <a class="a-left" routerLink="/user/hours-tracked-report">Hours tracked reprot</a>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body row">
+        <h6>Worked least hours</h6>
+        <div class="col-12 pl-0 pr-0" *ngFor="let leastHR of UserLeastWorkingHours">
+                <div *ngIf="leastHR != null" class="d-flex align-items-center">
+                  <span class="name-pro">
+                        {{leastHR.UserName}}
+                  </span>
+                  <ngb-progressbar class="w-100 progress-bar-h" type="danger" [value]="setProgreccbar(leastHR.WorkingHours)"></ngb-progressbar>
+                  <span class="hr-pro">
+                      {{setTime(leastHR.WorkingHours)}}
+                  </span>
+                </div>
+        </div>
+      </div>
+      <a class="a-left" routerLink="/user/hours-tracked-report">Hours tracked reprot</a>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+

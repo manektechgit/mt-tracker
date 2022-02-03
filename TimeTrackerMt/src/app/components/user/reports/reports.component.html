@@ -1,0 +1,74 @@
+<div class="card">
+  <p-toolbar>
+    <ng-template pTemplate="left" [formGroup]="ReportsForm">
+      <!--For Project-->
+      <div class="Project box-main">
+        <label class="itemLbl">Projects</label>
+        <p-multiSelect (onChange)="onProjectSelect($event.value)" [options]="ProjectDropdownList"
+          formControlName="selectedProject" defaultLabel="Select a Project" optionLabel="Name"></p-multiSelect>
+      </div>
+
+      <!--For User-->
+      <div class="UserMain box-main"
+        *ngIf="currentLoginUser?.RoleId===2 || currentLoginUser?.RoleId===5 || currentLoginUser?.RoleId===6">
+        <label class="itemLbl">Users</label>
+        <p-multiSelect (onChange)="onUserSelect($event.value)" [options]="userDropdownList"
+          formControlName="selectedUsers" defaultLabel="Select a User" optionLabel="FirstName"></p-multiSelect>
+      </div>
+
+      <!--For Date Range-->
+      <div class="DateRange">
+        <label for="range" class="itemLbl">Range</label>
+        <p-calendar class="Range" (onSelect)="onSelectRange($event)" dateFormat="dd-M-yy" formControlName="rangeDates"
+          selectionMode="range" [readonlyInput]="true"></p-calendar>
+      </div>
+    </ng-template>
+  </p-toolbar>
+  <br>
+  <p-tabView>
+    <p-tabPanel header="Reports" *ngIf="showTabs && showTabs['one']">
+
+      <div class="table-responsive">
+        <p-table [columns]="reportsMasterList" [value]="reportsMasterList" id="Datatable" selectionMode="multiple" #dt
+          styleClass="p-datatable-sm" [lazy]="true" [globalFilterFields]="['Username','Projectname','','Total']">
+          <ng-template pTemplate="caption">
+            Report
+            <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
+              class="p-button-success " pTooltip="XLS" tooltipPosition="bottom"></button>
+
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th width="15%">User name</th>
+              <th width="15%">Project name</th>
+              <th *ngFor="let item of dateList;">{{item.AttandanceDate| date: 'MMM-dd'}}</th>
+              <th width="10%">Total</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-product>
+            <tr>
+              <td> {{product.FirstName}}</td>
+              <td> {{product.Name}}</td>
+              <td *ngFor="let data of dateList">
+                {{product[data.AttandanceDate] != null ? removeZero(product[data.AttandanceDate]) : '-'}} </td>
+              <td> {{product.Total}}</td>
+          </ng-template>
+        </p-table>
+      </div>
+    </p-tabPanel>
+
+
+    <!-- report-summary View -->
+    <p-tabPanel header="Report-Summary" *ngIf="showTabs && showTabs['three']">
+      <app-report-summary [ReportSummeryDetails]="ReportSummeryList"></app-report-summary>
+    </p-tabPanel>
+    <p-tabPanel header="Activity log" *ngIf="showTabs && showTabs['four']">
+      <app-my-activities [MyActivitiesDetails]="MyActivitiesList"></app-my-activities>
+    </p-tabPanel>
+  </p-tabView>
+</div>
+
+<!-- <div style="display: none;">
+      <app-report-summary [ReportSummeryDetails]="ReportSummeryDetails">
+
+      </app-report-summary></div> -->

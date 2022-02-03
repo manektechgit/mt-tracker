@@ -1,0 +1,50 @@
+<div class="card" *ngIf="mode=='default'">
+  <p-toolbar styleClass="p-mb-2">
+    <ng-template pTemplate="left">
+      <button pButton pRipple label="Add Task" icon="pi pi-plus" class="p-button-success p-mr-2"
+        (click)="SetInsertMode()" title="Add Task"></button>
+    </ng-template>
+    <ng-template pTemplate="right">
+      <span class="p-input-icon-right">
+        <i class="pi pi-search"></i>
+        <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+          placeholder="Task Search" />
+      </span>
+    </ng-template>
+  </p-toolbar>
+  <br>
+  <p-table [value]="task" #dt styleClass="p-datatable-sm" [lazy]="true" (onLazyLoad)="loadTaskData($event)"
+    [paginator]="true" [rows]="showTotalRecords" [totalRecords]="totalRecordsInDb" [loading]="loading"
+    [rowsPerPageOptions]="[10,25,50]" [globalFilterFields]="['Name','CompanyName','DepartmentName','Status']">
+    <ng-template pTemplate="caption">
+      Manage Task
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th width="30%" pSortableColumn="Name"> Name <p-sortIcon field="Name"></p-sortIcon>
+        </th>
+        <th width="20%" pSortableColumn="ProjectName">Project Name <p-sortIcon field="ProjectName"></p-sortIcon>
+        </th>
+        <th width="10%" pSortableColumn="Status">Status<p-sortIcon field="Status"></p-sortIcon>
+        </th>
+        <th width="10%">Action</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+      <tr>
+        <td title="{{product.Name}}">{{product.Name}}</td>
+        <td title="{{product.ProjectName}}">{{product.ProjectName}}</td>
+        <td title="{{product.Status}}">{{product.Status}}</td>
+        <td><i class="fas fa-pencil-alt Icon mr-2" style="cursor: pointer;" (click)="SetEditMode(product)" title="Edit"></i>
+          <i class="far fa-trash-alt DeleteIcon mr-2" style="cursor: pointer;"  (click)="SetDeleteMode(product)" title="Delete"></i>
+        </td>
+
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<ng-container *ngIf="mode=='insert' || mode=='edit'">
+  <app-add-edit-task [selectedTask]="selectedTask" [addEditModeTask]="mode" (mode)="SetDefaultMode($event)">
+  </app-add-edit-task>
+</ng-container>

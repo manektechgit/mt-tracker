@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card admin-profile bg-light shadow mb-4">
+      <div class="d-sm-flex justify-content-between">
+        <div class="userinfo">
+          <form class="form_common_style" (ngSubmit)="onSubmit()" name="AttendenceHourForm"
+            [formGroup]="AttendenceHourForm">
+            <div class="row">
+
+              <div class="col-6">
+
+                <label class="itemLbl">Start Date</label>
+                <p-calendar inputId="StartDate" formControlName="StartDate" dateFormat="dd-M-yy"></p-calendar>
+
+              </div>
+              <div class="col-6">
+
+                <label class="itemLbl">End Date</label>
+                <p-calendar inputId="EndDate" formControlName="EndDate" dateFormat="dd-M-yy"></p-calendar>
+
+              </div>
+            </div>
+            <br/>
+            <div class="row">
+
+
+              <div class="col-6">
+                <label>Full Day Hours</label>
+                <input type="number" formControlName="Fulldayhours" name="Fulldayhours" id="Fulldayhours " (input)="checkValue($event)"
+                  class="form-control form-input ng-pristine ng-invalid ng-touched" placeholder="Full Day hours" min="0"
+                  name="Fulldayhours">
+                <div class="text-danger"
+                  *ngIf="f.Fulldayhours.invalid && (f.Fulldayhours.dirty || f.Fulldayhours.touched || isSubmit)">
+                  <span *ngIf="f.Fulldayhours.errors.required">
+                    Please enter Full Day Hours
+                  </span>
+                </div>
+              </div>
+              <div class="col-6">
+                <label>Half Day Hours</label>
+                <input type="number" formControlName="Halfdayhours" name="Halfdayhours" id="Halfdayhours"(input)="checkValue($event)"
+                  class="form-control form-input ng-pristine ng-invalid ng-touched" placeholder="Half Day Hours" min="0"
+                  name="Halfdayhours">
+                <div class="text-danger"
+                  *ngIf="f.Halfdayhours.invalid && (f.Halfdayhours.dirty || f.Halfdayhours.touched || isSubmit)">
+                  <span *ngIf="f.Halfdayhours.errors.required">
+                    Please enter Half Day Hours
+                  </span>
+                </div>
+              </div>
+              <div class="col-12 mt-3">
+                <button class="btn submit-btn" style="margin: 3px;" type="submit">Save</button> &nbsp;
+                <button class="btn cancel-btn" style="margin: 3px;" type="button"
+                  (click)="onSaveOrCancel('cancel')">Cancel</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

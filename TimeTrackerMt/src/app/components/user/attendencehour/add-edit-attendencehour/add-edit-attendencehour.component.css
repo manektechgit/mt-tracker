@@ -1,0 +1,58 @@
+.custom-day {
+  text-align: center;
+  padding: 0.185rem 0.25rem;
+  display: inline-block;
+  height: 2rem;
+  width: 2rem;
+}
+.custom-day.focused {
+  background-color: #e6e6e6;
+}
+.custom-day.range, .custom-day:hover {
+  background-color: rgb(2, 117, 216);
+  color: white;
+}
+.custom-day.faded {
+  background-color: rgba(2, 117, 216, 0.5);
+}
+.Log td{
+font-weight: 500;
+}
+.TimeFormate{
+width: 220px;
+}
+
+::ng-deep.ng-tns-c169-2.p-inputtext.p-component.ng-star-inserted{
+min-width: 244px;
+}
+.itemLbl{
+display: block;
+}
+.box-main{
+margin-right:15px;
+}
+::ng-deep.Project .p-multiselect{
+min-width: 220px;
+}
+::ng-deep.p-datatable table {
+border-collapse: collapse;
+table-layout: auto;
+width: 100%;
+}
+::ng-deep.p-text-bold.p-ml-2{
+margin-left: 25px;
+}
+::ng-deep.p-button.p-button-icon-only.p-button-rounded {
+border-radius: 50px;
+height: 30px;
+width: 30px;
+}
+::ng-deep.UserMain .p-multiselect{
+min-width: 220px;
+}
+.card.DateRange.p-calendar .p-inputtext {
+-ms-flex: 1 1 auto;
+flex: 1 1 auto;
+width: 1%;
+width: 363px;
+}

@@ -1,0 +1,55 @@
+<div class="main login_main">
+  <app-header></app-header>
+
+  <section class="vh-100 login_page" style="background-color: #508bfc;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-10 col-lg-6 col-5" style="margin-top: -50px">
+          <div class="card shadow-2-strong" style="border-radius: 1rem;">
+            <div class="card-body p-5">
+              <h3 class="mb-5 text-center ">Sign in</h3>
+              <form class="form-signin" (ngSubmit)="onSubmit()" name="loginForm" [formGroup]="loginForm">
+                <div class="form-label-group">
+                  <label for="inputEmail">Email address</label>
+                  <input type="email" name="Email" formControlName="Email" id="inputEmail" class="form-control form-control-lg"
+                    placeholder="Email address">
+                  <div class="text-danger" *ngIf="f.Email.invalid && (f.Email.dirty || f.Email.touched || isSubmit)">
+                    <span *ngIf="f.Email.errors.required">
+                      Please enter a email
+                    </span>
+                    <span *ngIf="f.Email.errors?.pattern">
+                      Please provide a valid email address
+                    </span>
+                  </div>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <label for="inputPassword">Password </label>
+                  <!-- <input type = "checkbox" (click)="myFunction()"> -->
+                  <input type="password" formControlName="Password" name="Password" id="inputPassword" class="form-control form-control-lg"
+                    placeholder="Password" ><span (click)="show()"><img src="https://i.stack.imgur.com/Oyk1g.png" id="EYE" style="margin-top: -34px;float: right; margin-right: 18px;cursor: pointer;"></span>
+                  <div class="text-danger"
+                    *ngIf="f.Password.invalid && (f.Password.dirty || f.Password.touched || isSubmit)">
+                    <span *ngIf="f.Password.errors.required">
+                      Please enter a password
+                    </span>
+                  </div>
+                </div>
+
+                 <div class="custom-control">
+                  <div class="custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="customCheck1" formControlName="Remember">
+                    <label class="custom-control-label" for="customCheck1">Remember Me</label>
+                  </div>
+                  <a class="forgot_password" [routerLink]="['/forget-password']">forgot password?</a>
+                </div>
+                 <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <app-footer></app-footer>
+</div>

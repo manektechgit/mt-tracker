@@ -1,0 +1,48 @@
+<div class="card" *ngIf="mode=='default'">
+    <p-toolbar styleClass="p-mb-2">
+      <ng-template pTemplate="left">
+        <button pButton pRipple label="Add Card" icon="pi pi-plus" class="p-button-success p-mr-2"
+          (click)="SetInsertMode()" title="Add Card"></button>
+      </ng-template>
+      <ng-template pTemplate="right">
+        <span class="p-input-icon-right">
+          <i class="pi pi-search"></i>
+          <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+            placeholder="Card Search" />
+        </span>
+      </ng-template>
+    </p-toolbar>
+    <br>
+    <p-table [value]="card" #dt styleClass="p-datatable-sm" [lazy]="true" (onLazyLoad)="loadCardData($event)"
+      [paginator]="true" [rows]="showTotalRecords" [totalRecords]="totalRecordsInDb" [loading]="loading"
+      [rowsPerPageOptions]="[10,25,50]" [globalFilterFields]="['FullName','CardNumber']">
+      <ng-template pTemplate="caption">
+        Manage Card
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th width="30%" pSortableColumn="FullName"> Full Name <p-sortIcon field="FullName"></p-sortIcon>
+          </th>
+          <th width="20%" pSortableColumn="CardNumber">Card Number <p-sortIcon field="CardNumber"></p-sortIcon>
+          </th>
+          <th width="10%">Action</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-card>
+        <tr>
+          <td title="{{card.FullName}}">{{card.FullName}}</td>
+          <td title="{{card.CardNumber}}">{{card.CardNumber}}</td>
+          <td><i class="fas fa-pencil-alt Icon mr-2" style="cursor: pointer;" (click)="SetEditMode(card)" title="Edit"></i>
+            <i class="far fa-trash-alt DeleteIcon mr-2" style="cursor: pointer;"  (click)="SetDeleteMode(card)" title="Delete"></i>
+          </td>
+  
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  
+  <ng-container *ngIf="mode=='insert' || mode=='edit'">
+    <app-add-edit-card [selectedCard]="selectedCard" [addEditModeCard]="mode" (mode)="SetDefaultMode($event)">
+    </app-add-edit-card>
+  </ng-container>
+  

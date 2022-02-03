@@ -1,0 +1,136 @@
+<div class="card" *ngIf="mode=='default'">
+  <p-toolbar styleClass="p-mb-2">
+    <ng-template pTemplate="left">
+      <button pButton pRipple label="Add Project" icon="pi pi-plus" class="p-button-success p-mr-2"
+        (click)="SetInsertMode()" title="Add Project"></button>
+    </ng-template>
+    <ng-template pTemplate="right">
+      <span class="p-input-icon-right">
+        <i class="pi pi-search"></i>
+        <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+          placeholder="Project Search" />
+      </span>
+    </ng-template>
+  </p-toolbar>
+  <br>
+  <p-table [value]="project" #dt styleClass="p-datatable-sm" [lazy]="true" (onLazyLoad)="loadProjectData($event)"
+    [paginator]="true" [rows]="showTotalRecords" [totalRecords]="totalRecordsInDb" [loading]="loading"
+    [rowsPerPageOptions]="[10,25,50]" [globalFilterFields]="['Name','CompanyName','DepartmentName','Status']">
+    <ng-template pTemplate="caption">
+      Manage Project
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th width="30%" pSortableColumn="Name"> Name <p-sortIcon field="Name"></p-sortIcon>
+        </th>
+        <th width="20%" pSortableColumn="CompanyName">Company Name <p-sortIcon field="CompanyName"></p-sortIcon>
+        </th>
+        <th width="30%" pSortableColumn="DepartmentName">Department Name <p-sortIcon field="DepartmentName">
+          </p-sortIcon>
+        </th>
+        <th width="10%" pSortableColumn="Status">Status<p-sortIcon field="Status"></p-sortIcon>
+        </th>
+        <th width="10%">Action</th>
+        <!-- <th width="10%">Users</th>
+        <th width="10%">Delete</th> -->
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+      <tr>
+        <td title="{{product.Name}}">{{product.Name}}</td>
+        <td title="{{product.CompanyName}}">{{product.CompanyName}}</td>
+        <td title="{{product.DepartmentName}}">{{product.DepartmentName}}</td>
+        <td title="{{product.Status}}">{{product.Status}}</td>
+        <td><i class="fas fa-pencil-alt Icon mr-2" style="cursor: pointer;" (click)="SetEditMode(product)"
+            title="Edit"></i>
+          <i *ngIf="currentLoginUser.RoleId === 2" class="fas fa-user-check mr-2"
+            style="cursor: pointer;font-size: 20px;color: mediumpurple;" (click)="OpenModel(content,product)"
+            title="Assign Project"></i>
+          <i class="fas fa-bars mr-2" style="cursor: pointer;font-size: 20px;color: mediumpurple;"
+            (click)="SetAddTaskMode(product)" title="Add Task"></i>
+          <i class="far fa-trash-alt DeleteIcon mr-2" style="cursor: pointer;" (click)="SetDeleteMode(product)"
+            title="Delete"></i>
+        </td>
+
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<ng-container *ngIf="mode=='insert' || mode=='edit'">
+  <app-add-edit-project [selectedProject]="selectedProject" [addEditModeProject]="mode" (mode)="SetDefaultMode($event)">
+  </app-add-edit-project>
+</ng-container>
+
+<ng-container *ngIf="mode=='AddTask'">
+  <app-add-edit-task [editProjectId]="editProjectId" (mode)="SetDefaultMode($event)">
+  </app-add-edit-task>
+</ng-container>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Assign Users</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="col-md-12" [formGroup]="ProjectForm">
+      <div class="form-group" style="display: flex;">
+        <div>
+
+          <label>User Name<span style="color: red">*</span></label>
+          <select class="form-control  Format" formControlName="UserId" name="UserId" required>
+            <option [ngValue]=null>-- Select --</option>
+            <option *ngFor="let drop of dropDownUsers" [ngValue]="drop.UserId">
+              {{drop.UserName}}
+            </option>
+          </select>
+          <div class="text-danger" *ngIf="f.UserId.invalid && (f.UserId.dirty || f.UserId.touched || isSubmit)">
+          </div>
+        </div>
+        <div>
+          <label style="margin-left: 15px;">Role Name<span style="color: red">*</span></label>
+          <select style="margin-left: 15px" class="form-control Format" formControlName="RoleId" name="RoleId" required>
+            <option [ngValue]=null>-- Select --</option>
+            <option *ngFor="let drop of dropDownRole" [ngValue]="drop.RoleId">
+              {{drop.RoleName}}
+            </option>
+          </select>
+          <div class="text-danger" *ngIf="f.RoleId.invalid && (f.RoleId.dirty || f.RoleId.touched || isSubmit)">
+          </div>
+        </div>
+        <button class="form-control"
+          style="background-color: darkgreen;color: white;margin-left: 15px;margin-top: 30px;"
+          (click)="onSubmit()">Submit</button>
+      </div>
+    </div>
+    <table class="table" style="margin-top: 25px;">
+      <thead>
+        <tr>
+          <th scope="col">Sr.No.</th>
+          <th scope="col">User Name</th>
+          <th scope="col">Role Name</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of ModelArray; let i=index">
+          <th style="width: 50px;">{{i+1}}</th>
+          <td>{{data.UserName}}</td>
+          <td>{{data.RoleName}}</td>
+          <td>
+            <button type="button" (click)="UserDeleteMode(data)" style="color: red;float: left;margin-left: 8px;"
+              class="close" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <hr />
+    <div class="col-md-4">
+    </div>
+  </div>
+
+</ng-template>

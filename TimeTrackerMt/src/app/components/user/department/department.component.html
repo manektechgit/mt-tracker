@@ -1,0 +1,54 @@
+<div class="card" *ngIf="!showAddDepartment">
+  <p-toolbar styleClass="p-mb-2">
+    <ng-template pTemplate="left">
+      <button pButton pRipple label="Add Department" icon="pi pi-plus" class="p-button-success p-mr-2"
+        (click)="SetInsertMode()" title="Add Department"></button>
+    </ng-template>
+    <ng-template pTemplate="right">
+      <span class="p-input-icon-right">
+        <i class="pi pi-search"></i>
+        <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+          placeholder="Department Search" />
+      </span>
+    </ng-template>
+  </p-toolbar>
+  <br>
+  <p-table [value]="departmentDataList" #dt styleClass="p-datatable-sm" [lazy]="true" (onLazyLoad)="loadUserData($event)"
+    [paginator]="true" [rows]="showTotalRecords" [totalRecords]="totalRecordsInDb" [loading]="loading"
+    [rowsPerPageOptions]="[10,25,50]" [globalFilterFields]="['Departmentname']">
+    <ng-template pTemplate="caption">
+      Manage Department
+    </ng-template>
+    <ng-template pTemplate="header">
+            <tr>
+                <th width="90%" pSortableColumn="Departmentname">Name<p-sortIcon field="Departmentname"></p-sortIcon></th>
+                <!-- <th width="30%" pSortableColumn="Companyname">Company<p-sortIcon field="Companyname"></p-sortIcon></th>               -->
+                <th  width="10%">Action</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-product >
+            <tr>
+                <td title="{{product.DepartmentName}}">{{product.DepartmentName}}</td>
+                <!-- <td>{{product.CompanyName}}</td> -->
+                <td style="width: 70px;" >
+                  <i class="fas fa-edit Icon mr-2" (click)="SetEditMode(product)" title="Edit"></i>
+                  <i class="far fa-trash-alt DeleteIcon" (click)="SetDeleteMode(product)" title="Delete"></i></td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+
+
+  <ng-container *ngIf="showAddDepartment">
+    <app-add-edit [selectedDept]="selectedDepartment" (onSubmitForm)="ShowDepartmentListing()"></app-add-edit>
+  </ng-container>
+
+
+
+
+
+
+
+
+
+

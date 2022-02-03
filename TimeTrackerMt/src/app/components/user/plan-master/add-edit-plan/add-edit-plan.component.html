@@ -1,0 +1,110 @@
+<div class="card">
+  <div class="row">
+    <div class="col-lg-10">
+      <div class="d-sm-flex justify-content-between">
+        <div class="userinfo">
+          <form class="form_common_style" (ngSubmit)="onSubmit()" name="PlanForm" [formGroup]="PlanForm">
+            <div class="row">
+              <div class="col-12">
+                <label>Name</label>
+                <input formControlName="Name" name="Name" id="inputName"
+                  class="form-control form-input ng-pristine ng-invalid ng-touched" placeholder="Name" >
+                <div class="text-danger"
+                  *ngIf="f.Name.invalid && (f.Name.dirty || f.Name.touched || isSubmit)">
+                  <span *ngIf="f.Name.errors.required">
+                    Please enter name
+                  </span>
+                  <span class="text-danger" *ngIf="IsError == true">
+                    Name already exists!
+                   </span>
+                </div>
+                <span *ngIf="f.Name.errors?.pattern" class="text-danger">
+                  Special characters and number are not allowed
+                </span>
+              </div>
+
+              <div class="col-6 mt-3">
+                <label>Amount per user</label>
+                <input type="number" formControlName="AmountPerUser" name="AmountPerUser" id="inputAmountPerUser" min="0"
+                  class="form-control form-input ng-pristine ng-invalid ng-touched" placeholder="Amount per user">
+                   <!-- (input)="checkValue($event)"> -->
+                <div class="text-danger"
+                  *ngIf="f.AmountPerUser.invalid && (f.AmountPerUser.dirty || f.AmountPerUser.touched || isSubmit)">
+                  <span *ngIf="f.AmountPerUser.errors.required">
+                    Please enter amount per user
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-6 mt-3">
+                <label>No of storage month<span class="Info-Text">(0 for unlimited)</span></label>
+                <input type="number" formControlName="NoOfStorageMonth" name="NoOfStorageMonth" id="inputNoOfStorageMonth" min="0"
+                  class="form-control form-input ng-pristine ng-invalid ng-touched" placeholder="No of storage month">
+                   <!-- (input)="checkValue($event)"> -->
+                <div class="text-danger"
+                  *ngIf="f.NoOfStorageMonth.invalid && (f.NoOfStorageMonth.dirty || f.NoOfStorageMonth.touched || isSubmit)">
+                  <span *ngIf="f.NoOfStorageMonth.errors.required">
+                    Please enter no of storage month
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-6 mt-3">
+                <label>No of support days</label>
+                <input type="number" formControlName="NoOfSupportDays" name="NoOfSupportDays" id="inputNoOfSupportDays" min="0"
+                  class="form-control form-input ng-pristine ng-invalid ng-touched" placeholder="No of support days">
+                   <!-- (input)="checkValue($event)"> -->
+                <div class="text-danger"
+                  *ngIf="f.NoOfSupportDays.invalid && (f.NoOfSupportDays.dirty || f.NoOfSupportDays.touched || isSubmit)">
+                  <span *ngIf="f.NoOfSupportDays.errors.required">
+                    Please enter no of support days
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-6 mt-3">
+                <label>No of department allowed<span class="Info-Text">(0 for unlimited)</span></label>
+                <input type="number" formControlName="NoOfDepartmentAllowed" name="NoOfDepartmentAllowed" id="inputNoOfDepartmentAllowed" min="0"
+                  class="form-control form-input ng-pristine ng-invalid ng-touched" placeholder="No of department allowed">
+                   <!-- (input)="checkValue($event)"> -->
+                <div class="text-danger"
+                  *ngIf="f.NoOfDepartmentAllowed.invalid && (f.NoOfDepartmentAllowed.dirty || f.NoOfDepartmentAllowed.touched || isSubmit)">
+                  <span *ngIf="f.NoOfDepartmentAllowed.errors.required">
+                    Please enter no of department allowed
+                  </span>
+                </div>
+              </div>
+              </div>
+              <div class="row left-Margin mt-3">
+                <div class="col-3">
+                  <input type="checkbox" formControlName="Is24HourSupport" id="Is24HourSupport" class="form-check-input" />
+                  <label for="Is24HourSupport" class="form-check-label">Is 24 hour support</label>
+                </div>
+              <div class="col-3">
+                <input type="checkbox" formControlName="IsTimeTracking" id="IsTimeTracking" class="form-check-input" />
+                <label for="IsTimeTracking" class="form-check-label">Is time tracking</label>
+              </div>
+              <div class="col-3">
+                <input type="checkbox" formControlName="IsTaskAndProject" id="IsTaskAndProject" class="form-check-input" />
+                <label for="IsTaskAndProject" class="form-check-label">Is task and project</label>
+              </div>
+              <div class="col-3">
+                <input type="checkbox" formControlName="IsAllowClientAccess" id="IsAllowClientAccess" class="form-check-input" />
+                <label for="IsAllowClientAccess" class="form-check-label">Is allow client access</label>
+              </div>
+              <div class="col-3" *ngIf="IsDefault == true">
+                <input type="checkbox" formControlName="IsDefaultPlan" id="IsDefaultPlan" class="form-check-input" />
+                <label for="IsDefaultPlan" class="form-check-label">Is default plan</label>
+              </div>
+              <div class="col-12 mt-3 button-margin">
+                <button class="btn submit-btn" style="margin: 3px;" type="submit">Save</button> &nbsp;
+                <button class="btn cancel-btn" style="margin: 3px;" type="button"
+                  (click)="onSaveOrCancel('cancel')">Cancel</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

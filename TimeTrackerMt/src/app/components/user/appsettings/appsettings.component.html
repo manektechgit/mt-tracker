@@ -1,0 +1,127 @@
+<div class="card" *ngIf="mode=='default'">
+  <p-toolbar styleClass="p-mb-2">
+    <ng-template pTemplate="left">
+
+    </ng-template>
+    <ng-template pTemplate="right">
+      <span class="p-input-icon-right">
+        <i class="pi pi-search"></i>
+        <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+          placeholder="AppSettings Search" />
+      </span>
+    </ng-template>
+  </p-toolbar>
+  <br>
+  <p-table [value]="appsettingslist" #dt styleClass="p-datatable-sm" [lazy]="true" (onLazyLoad)="loadAppSettingsData($event)"
+    [paginator]="true" [rows]="showTotalRecords" [totalRecords]="totalRecordsInDb" [loading]="loading"
+    [rowsPerPageOptions]="[10,25,50]" [globalFilterFields]="['Parameterkey','Value','Type','Description','DisplayName']">
+    <ng-template pTemplate="caption">
+      Manage AppSettings
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th width="30%" pSortableColumn="Parameterkey">Parameter key <p-sortIcon field="Parameterkey"></p-sortIcon>
+        </th>
+        <th width="20%" pSortableColumn="Value">Value<p-sortIcon field="Value"></p-sortIcon>
+        </th>
+        <th width="30%" pSortableColumn="Type">Type <p-sortIcon field="Type"></p-sortIcon>
+        </th>
+        <th width="30%" pSortableColumn="Description">Description <p-sortIcon field="Description"></p-sortIcon>
+        </th>
+        <th width="30%" pSortableColumn="DisplayName">Display name <p-sortIcon field="DisplayName"></p-sortIcon>
+        </th>
+        <th width="10%">Edit</th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+      <tr>
+        <td>{{product.Parameterkey}}</td>
+        <td>{{product.Value}}</td>
+        <td>{{product.Type}}</td>
+        <td>{{product.Description}}</td>
+        <td>{{product.DisplayName}}</td>
+        <td style="width: 70px;" (click)="SetEditMode(product)"><i class="fas fa-edit Icon"></i></td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+<ng-container *ngIf="mode=='insert' || mode=='edit'">
+  <app-add-edit-appsettings [selectedAppsettings]="selectedAppsettings" [addEditMode]="mode" (mode)="SetDefaultMode($event)"></app-add-edit-appsettings>
+</ng-container>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container-fluid admin-content">
+  <div class="row top-bar">
+    <div class="col-lg-8">
+      <div class="d-flex align-items-center justify-content-between">
+        <ul class="breadcrumbs">
+          <li><a [routerLink]="['/user']" title="Home">Dashboard</a></li>
+          <li><span>AppSettings Master</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="mode=='default'">
+    <div class="col-12">
+      <div class="card shadow mb-4">
+        <input type="text" class="form-control" placeholder="Search.." style="width: 250px;margin: 5px;"
+          [(ngModel)]="searchText">
+          <div class="list_box">
+            <div class="list_box_inn ">
+              <div class="d-md-flex flex-md-wrap justify-content-md-start">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Key</th>
+                <th scope="col">Value</th>
+                <th scope="col">Type</th>
+                <th scope="col">Description</th>
+                <th scope="col">Display name</th>
+                <th scope="col">Edit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let appsettings of appsettingslist | filterappsettings:searchText; let i=index">
+                <th style="width: 50px;">{{i+1}}</th>
+                <td>{{appsettings.Key}}</td>
+                <td>{{appsettings.Value}}</td>
+                <td>{{appsettings.Type}}</td>
+                <td>{{appsettings.Description}}</td>
+                <td>{{appsettings.DisplayName}}</td>
+                <td style="width: 70px;" (click)="SetEditMode(appsettings)"><i class="fas fa-edit Icon"></i></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-container *ngIf="mode=='insert' || mode=='edit'">
+    <app-add-edit-appsettings [selectedAppsettings]="selectedAppsettings" [addEditMode]="mode" (mode)="SetDefaultMode($event)"></app-add-edit-appsettings>
+  </ng-container>
+</div> -->

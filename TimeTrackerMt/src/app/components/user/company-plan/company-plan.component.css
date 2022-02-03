@@ -1,0 +1,65 @@
+.plans .card {
+  border: none;
+  border-radius: 1rem;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  -webkit-box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+}
+
+.plans hr {
+  margin: 1.5rem 0;
+}
+
+.plans .card-title {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+  letter-spacing: .1rem;
+  font-weight: bold;
+}
+
+.plans .card-price {
+  font-size: 3rem;
+  margin: 0;
+}
+
+.plans .card-price .period {
+  font-size: 0.8rem;
+}
+
+.plans ul li {
+  margin-bottom: 1rem;
+}
+
+.plans .text-muted {
+  opacity: 0.7;
+}
+
+.plans .btn {
+  font-size: 90%;
+  border-radius: 1rem;
+  letter-spacing: .1rem;
+  font-weight: bold;
+  padding: 1rem;
+  opacity: 0.7;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.plans .btn-menu {
+  width: 150px;
+  font-size: 90%;
+  border-radius: 1rem;
+  letter-spacing: .1rem;
+  font-weight: bold;
+  padding: 1rem;
+  opacity: 0.7;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s
+
+}
+
+.plans button:focus {
+  outline: 1px dotted;
+  outline: 0px auto -webkit-focus-ring-color;
+}

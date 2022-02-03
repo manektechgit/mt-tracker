@@ -1,0 +1,26 @@
+{
+  "productName": "mt-tracker",
+  "directories": {
+    "output": "release/"
+  },
+    "files": [
+    ],
+  "win": {
+    "icon": "icon.ico",
+    "target": [
+      "nsis"
+    ]
+  },
+  "mac": {
+    "icon": "512.ico",
+    "target": [
+      "dmg"
+    ]
+  },
+  "linux": {
+    "icon": "icon.ico",
+    "target": [
+      "AppImage"
+    ]
+  }
+}

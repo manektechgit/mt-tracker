@@ -1,0 +1,139 @@
+<div class="card">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="justify-content-between">
+        <div class="userinfo">
+          <form class="form_common_style" (ngSubmit)="onSubmit()" name="UserForm" [formGroup]="UserForm">
+            <div class="row">
+              <div class="col-6">
+                <label>Email <span>*</span></label>
+                <input type="text" formControlName="Email" (blur)="onBlurMethod()" class="form-control form-input"
+                  placeholder="Enter email" [attr.readonly]="addEditMode == 'edit' ? true : null">
+                <div class="text-danger" *ngIf="f.Email.invalid && (f.Email.dirty || f.Email.touched || isSubmit)">
+                  <span *ngIf="f.Email.errors.required">
+                    Please enter email
+                  </span>
+                </div>
+                <span class="text-danger" *ngIf="f.Email.errors?.pattern">
+                  Please provide a valid email address
+                </span>
+                <span class="text-danger" *ngIf="IsError == true">
+                  Email already exist !
+                </span>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-6 mt-3">
+                <label>Access Role <span>*</span></label><br>
+                <div class="form-check-inline" *ngFor="let dropdown of dropDownRole;let i=index">
+                  <label class="form-check-label lblRadio" for="inlineRadio{{i}}">
+                    <input type="radio" id="inlineRadio{{i}}" class="form-check-input" name="RoleId"
+                      formControlName="RoleId" [value]="dropdown.RoleId">{{dropdown.RoleName}}
+                  </label>
+                </div>
+                <div class="text-danger" *ngIf="f.RoleId.invalid && (f.RoleId.dirty || f.RoleId.touched || isSubmit)">
+                  <span *ngIf="f.RoleId.errors.required">
+                    Please select rolename
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-6 mt-3">
+                <label>Project Role <span>*</span></label><br>
+                <div class="form-check-inline" *ngFor="let dropdown of dropDownProjectRole;let i=index">
+                  <label class="form-check-label lblRadio" for="inlineRadio{{dropdown.RoleId}}">
+                    <input type="radio" id="inlineRadio{{dropdown.RoleId}}" class="form-check-input"
+                      name="ProjectRoleId" formControlName="ProjectRoleId"
+                      [value]="dropdown.RoleId">{{dropdown.RoleName}}
+                  </label>
+                </div>
+                <div class="text-danger" *ngIf="f.RoleId.invalid && (f.RoleId.dirty || f.RoleId.touched || isSubmit)">
+                  <span *ngIf="f.RoleId.errors.required">
+                    Please select project rolename
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-6 mt-3">
+                <label>Department <span>*</span></label><br>
+                <div class="form-check form-check-inline" *ngFor="let department of dropDownDepartment; let i=index">
+                  <input class="form-check-input" type="checkbox" id="chkDepartment{{department.DepartmentId}}"
+                    [value]="department.DepartmentId" (change)="onDepartmentChange($event)"
+                    [attr.checked]="department.IsChecked === true ? true : null">
+                  <label class="form-check-label lblCheckbox"
+                    for="chkDepartment{{department.DepartmentId}}">{{department.DepartmentName}}</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row" [ngClass]="{'d-none': currentLoginUser.RoleId != 2}">
+              <div class="col-6 mt-3">
+                <label>Projects <span>*</span></label><br>
+                <div class="form-check form-check-inline chkProjects"
+                  *ngFor="let project of dropDownProject; let i=index">
+                  <input class="form-check-input" type="checkbox" id="chkProject{{project.ProjectId}}"
+                    [value]="project.ProjectId" (change)="onProjectChange($event)"
+                    [attr.checked]="project.IsChecked === true ? true : null">
+                  <label class="form-check-label lblCheckbox"
+                    for="chkProject{{project.ProjectId}}">{{project.Name}}</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-6 mt-3">
+                <label>Screencasts<span>*</span></label>
+                <select class="form-control form-input" formControlName="ScreenCastId" name="ScreenCastId" required>
+                  <option [ngValue]=null>-- Select --</option>
+                  <option *ngFor="let screencast of dropDownScreenCast" [ngValue]="screencast.ScreenCastId">
+                    {{screencast.Name}}
+                  </option>
+                </select>
+                <div class="text-danger"
+                  *ngIf="f.ScreenCastId.invalid && (f.ScreenCastId.dirty || f.ScreenCastId.touched || isSubmit)">
+                  <span *ngIf="f.ScreenCastId.errors.required">
+                    Please select screen cast
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-6 mt-3">
+                <label>Time Zone<span>*</span></label>
+                <select class="form-control form-input" [(ngModel)]="localTimeZone" formControlName="TimeZoneId"
+                  name="TimeZoneId" required>
+                  <option *ngFor="let TimeZone of TimeZoneList" [ngValue]="TimeZone.TimeZoneId">
+                    {{TimeZone.text}}
+                  </option>
+                </select>
+                <div class="text-danger"
+                  *ngIf="f.TimeZoneId.invalid && (f.TimeZoneId.dirty || f.TimeZoneId.touched || isSubmit)">
+                  <span *ngIf="f.TimeZoneId.errors.required">
+                    Please select time zone
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 mt-3">
+                <button class="btn submit-btn" style="margin: 3px;" type="submit" *ngIf="addEditMode == 'insert'">Send
+                  Invites</button> &nbsp;
+                <button class="btn submit-btn" style="margin: 3px;" type="submit"
+                  *ngIf="addEditMode == 'edit'">Update</button> &nbsp;
+                <button class="btn cancel-btn" style="margin: 3px;" type="button"
+                  (click)="onSaveOrCancel('cancel')">Cancel</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-lg-10">
+    <div class="card admin-profile bg-light shadow mb-4">
+      <div class="d-sm-flex justify-content-between">
+        <div class="userinfo">
+          <form class="form_common_style" (ngSubmit)="onSubmit()" name="AppSettingsForm" [formGroup]="AppSettingsForm">
+            <div class="row">
+              <div class="col-12">
+                <label>Value</label>
+                <input formControlName="Value" name="Value" id="inputValue" class="form-control form-input ng-pristine ng-invalid ng-touched"
+                  placeholder="Value">
+                <div class="text-danger"
+                  *ngIf="f.Value.invalid && (f.Value.dirty || f.Value.touched || isSubmit)">
+                  <span *ngIf="f.Value.errors.required">
+                    Please enter value
+                  </span>
+                </div>
+                <span *ngIf="f.Value.errors?.pattern" class="text-danger">
+                  Special characters are not allowed
+                </span>
+              </div>
+              <div class="col-12 mt-3">
+                <button class="btn submit-btn" style="margin: 3px;" type="submit">Save</button> &nbsp;
+                <button class="btn cancel-btn" style="margin: 3px;" type="button" (click)="onSaveOrCancel('cancel')">Cancel</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

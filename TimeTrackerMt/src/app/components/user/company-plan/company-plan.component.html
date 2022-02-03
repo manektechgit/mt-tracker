@@ -1,0 +1,38 @@
+<div class="card plans">
+
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h3 class="events">Choose your plan</h3>
+    </div>
+  </div>
+
+  <div class="row justify-content-center py-2">
+    <ul class="nav justify-content-center">
+      <li class="nav-item px-3">
+        <button class="btn-menu btn-primary btn-lg btn-block active" name="paytype" id="payannually" role="button"
+          (click)="changePayType($event)">Annually</button>
+      </li>
+      <li class="nav-item px-3">
+        <button class="btn-menu btn-primary btn-lg btn-block" name="paytype" id="paymonthly" role="button"
+          (click)="changePayType($event)">Monthly</button>
+      </li>
+    </ul>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-md-12">
+      <label>{{noOfUser}}</label>
+      <p-slider [(ngModel)]="noOfUser" [step]="5" [min]="5" [max]="100" (onChange)="changeNoOfUser($event)"></p-slider>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-4" *ngFor="let plan of plans">
+      <app-plan-payment [noOfUser]="noOfUser" [currentPlan]="currentPlan" [payType]="payType" [plan]="plan"></app-plan-payment>
+    </div>
+  </div>
+
+  <!-- <ngx-paypal #payPalElem [config]="payPalConfig"></ngx-paypal> -->
+  <!-- <div #paypal></div> -->
+
+</div>

@@ -1,0 +1,77 @@
+<div class="card" *ngIf="mode=='default'">
+  <p-toolbar styleClass="p-mb-2">
+    <ng-template pTemplate="left">
+      <button pButton pRipple label="Invite User" icon="pi pi-plus" class="p-button-success p-mr-2"
+        (click)="SetInsertMode()"></button>
+    </ng-template>
+    <ng-template pTemplate="right">
+      <span class="p-input-icon-right">
+        <i class="pi pi-search"></i>
+        <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+          placeholder="User Search" />
+      </span>
+    </ng-template>
+  </p-toolbar>
+  <br>
+
+
+  <p-table [value]="usersDataList" #dt styleClass="p-datatable-sm" [lazy]="true" (onLazyLoad)="loadUserData($event)"
+    [paginator]="true" [rows]="showTotalRecords" [totalRecords]="totalRecordsInDb" [loading]="loading"
+    [rowsPerPageOptions]="[10,25,50]"
+    [globalFilterFields]="['Firstname','Lastname','Email','Departmentname','Rolename','ReportingPerson','TimeZone']">
+    <ng-template pTemplate="caption">
+      Manage User
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th width="30%" pSortableColumn="Firstname">Name<p-sortIcon field="Firstname"></p-sortIcon>
+        </th>
+        <th width="30%" pSortableColumn="Email">Email<p-sortIcon field="Email"></p-sortIcon>
+        </th>
+        <th width="30%" pSortableColumn="Departmentname">Department<p-sortIcon field="Departmentname"></p-sortIcon>
+        </th>
+        <th width="20%" pSortableColumn="Rolename">Role<p-sortIcon field="Rolename"></p-sortIcon>
+        </th>
+        <th width="20%" pSortableColumn="ReportingPerson">Reporting person<p-sortIcon field="ReportingPerson">
+          </p-sortIcon>
+        </th>
+        <th width="30%" pSortableColumn="Time Zone">Time Zone<p-sortIcon field="TimeZone">
+          </p-sortIcon>
+         </th>
+        <th width="15%">Active</th>
+        <th width="10%">Edit</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+      <tr>
+        <td>{{product.FirstName}}</td>
+        <td>{{product.Email}}</td>
+        <td>{{product.DepartmentName}}</td>
+        <td>{{product.RoleName}}</td>
+        <td>{{product.ReportingPerson}}</td>
+        <td>{{product.TimeZone}}</td>
+        <td>
+          <div class="custom-switch">
+            <input type="checkbox" class="custom-control-input" id="{{product.UserId}}" [(ngModel)]="product.IsActive"
+              (click)="onChange($event.target.checked,product)">
+            <label class="custom-control-label" for="{{product.UserId}}" style="margin-bottom: 15px;"></label>
+          </div>
+        </td>
+        <td><i class="fas fa-pencil-alt Icon" style="margin-left: 4px;" (click)="SetEditMode(product)"></i></td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<!-- Old User Crud -->
+<!-- <ng-container *ngIf="mode=='insert' || mode=='edit'">
+  <app-insert-update [UserDetail]="UserDetail" [addEditMode]="mode" (mode)="SetDefaultMode($event)">
+  </app-insert-update>
+</ng-container> -->
+<!-- Old user Crud End -->
+
+<ng-container *ngIf="mode=='insert' || mode=='edit'">
+  <app-invite [UserDetail]="UserDetail" [addEditMode]="mode" (mode)="SetDefaultMode($event)"></app-invite>
+</ng-container>
+
+

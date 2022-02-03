@@ -1,0 +1,53 @@
+<form class="form_common_style" (ngSubmit)="onSubmit()" name="CompanyForm" [formGroup]="CompanyForm">
+  <div class="container">
+    <p-card>
+      <div class="row mt-3">
+        <div class="col-12 mt-3">
+          <label>Company Name<span>*</span></label>
+          <input type="text" formControlName="CompanyName" (blur)="onBlurCompany()" class="form-control form-input"
+            placeholder="Enter company name">
+          <div class="text-danger"
+            *ngIf="f.CompanyName.invalid && (f.CompanyName.dirty || f.CompanyName.touched || isSubmit)">
+            <span *ngIf="f.CompanyName.errors.required">
+              Please enter company name
+            </span>
+          </div>
+          <span class="text-danger" *ngIf="IsError == true">
+            Company already exist !
+          </span>
+        </div>
+
+        <div class="col-12 mt-3">
+          <label>Size Of Team <span>*</span></label><br>
+          <div class="form-check-inline" *ngFor="let team of dropdownNumberOfUser;let i=index">
+            <label class="form-check-label" for="inlineRadio{{team.DropdownId}}">
+              <input type="radio" id="inlineRadio{{team.DropdownId}}" class="form-check-input" name="NumberOfUserId"
+                formControlName="NumberOfUserId" [value]="team.DropdownId"
+                (change)="radioNumberOfUserChange(team.DropdownId)">{{team.DropdownText}}
+            </label>
+          </div>
+        </div>
+
+        <input type="hidden" [(ngModel)]="localTimeZone" formControlName="TimeZoneId" name="TimeZoneId" />
+        <!-- <div class="col-3 mt-3">
+          <label>Time Zone<span>*</span></label>
+          <select class="form-control form-input" [(ngModel)]="localTimeZone" formControlName="TimeZoneId" name="TimeZoneId" required>
+            <option *ngFor="let TimeZone of TimeZoneList" [ngValue]="TimeZone.TimeZoneId">
+              {{TimeZone.text}}
+            </option>
+          </select>
+          <div class="text-danger"
+            *ngIf="f.TimeZoneId.invalid && (f.TimeZoneId.dirty || f.TimeZoneId.touched || isSubmit)">
+            <span *ngIf="f.TimeZoneId.errors.required">
+              Please select time zone
+            </span>
+          </div>
+        </div> -->
+
+        <div class="col-12 mt-3">
+          <button class="btn submit-btn" id="btnStepNext" type="submit" title="Save">Next ></button>
+        </div>
+      </div>
+    </p-card>
+  </div>
+</form>

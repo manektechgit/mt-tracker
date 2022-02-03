@@ -1,0 +1,14 @@
+.Icon {
+    font-size: 20px;
+    color: darkcyan;
+    cursor: pointer !important;
+}
+
+.dropdown-item{
+    cursor: pointer;
+}
+
+.form_common_style .text-danger {
+  position: absolute;
+  bottom: -28px;
+}

@@ -1,0 +1,60 @@
+
+<!-- <div class="container-fluid"> -->
+  <div class="card" *ngIf="mode=='default'">
+    <p-toolbar styleClass="p-mb-2">
+      <ng-template pTemplate="left">
+        <button pButton pRipple label="Add Plan" icon="pi pi-plus" class="p-button-success p-mr-2"
+          (click)="SetInsertMode()"></button>
+      </ng-template>
+      <ng-template pTemplate="right">
+        <span class="p-input-icon-right">
+          <i class="pi pi-search"></i>
+          <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+            placeholder="Plan Search" />
+        </span>
+      </ng-template>
+    </p-toolbar>
+    <br>
+    <p-table [value]="Plans" #dt styleClass="p-datatable-sm" [lazy]="true" (onLazyLoad)="loadPlans($event)"
+      [paginator]="true" [rows]="showTotalRecords" [totalRecords]="totalRecordsInDb" [loading]="loading"
+      [rowsPerPageOptions]="[10,25,50]" [globalFilterFields]="['Name','AmountPerUser','NoOfStorageMonth','NoOfSupportDays']">
+      <ng-template pTemplate="caption">
+        Manage Plans
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th width="30%" pSortableColumn="CompanyName">Plan name<p-sortIcon field="Name"></p-sortIcon>
+          </th>
+          <th width="20%" pSortableColumn="NumberOfUser"> Amount per user <p-sortIcon field="AmountPerUser"></p-sortIcon>
+          </th>
+          <th width="17%" pSortableColumn="CompanyURL">Storage month <p-sortIcon field="NoOfStorageMonth"></p-sortIcon>
+          </th>
+          <th width="17%" pSortableColumn="CompanyURL">Support days <p-sortIcon field="NoOfSupportDays"></p-sortIcon>
+          </th>
+          <th width="10%">Active</th>
+          <th>Edit</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td>{{product.Name}}</td>
+          <td>{{product.AmountPerUser}}</td>
+          <td>{{product.NoOfStorageMonth}}</td>
+          <td>{{product.NoOfSupportDays}}</td>
+          <td>
+            <div class="custom-switch">
+              <input type="checkbox" class="custom-control-input" id="{{product.PlanId}}"
+                [(ngModel)]="product.IsActive" (click)="ActiveDeactivePlan($event.target.checked,product)">
+              <label class="custom-control-label" for="{{product.PlanId}}" style="margin-bottom: 15px;"></label>
+            </div>
+          </td>
+          <td style="width: 70px;" (click)="SetEditMode(product)"><i class="fas fa-pencil-alt Icon" style="margin-left: 4px;"></i></td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <ng-container *ngIf="mode=='insert' || mode=='edit'">
+    <app-add-edit-plan [selectedPlan]="selectedPlan" [addEditMode]="mode" (mode)="SetDefaultMode($event)">
+    </app-add-edit-plan>
+  </ng-container>
+  <!-- </div> -->

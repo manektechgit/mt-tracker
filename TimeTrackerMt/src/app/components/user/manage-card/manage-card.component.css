@@ -1,0 +1,16 @@
+.Icon {
+    font-size: 20px;
+    color: darkcyan;
+    cursor: pointer !important;
+  }
+  
+  select{
+    width: 160px;
+  }
+  
+  .DeleteIcon {
+    font-size: 20px;
+    color: #c75656;
+    cursor: pointer !important;
+  }
+  

@@ -1,0 +1,19 @@
+<div class="main">
+  <app-header></app-header>
+  <!-- <button (click)="openXl(content)">Show Log</button> -->
+  <app-footer></app-footer>
+</div>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Screen Log</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-user-screen-log></app-user-screen-log>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>

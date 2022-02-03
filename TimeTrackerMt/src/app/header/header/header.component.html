@@ -1,0 +1,49 @@
+ <header>
+  <nav class="navbar navbar-expand-lg navbar-light headerColor ">
+    <div class="breadcrumb-dn">
+      <a  [routerLink]="['/home']">
+        <h4><u  class="headar" >TimeTrackerMt</u></h4>
+      </a>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" *ngIf="!this.isElectron">
+      <span class="navbar-toggler-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+    </button>
+
+    <ul class="nav navbar-nav nav-flex-icons ml-auto">
+      <li class="nav-item ">
+        <a class="nav-link" [routerLink]="['/home']" ><i class="fas fa-home"></i> <span class="clearfix d-none d-sm-inline-block icon">Home</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/login']" ><i class="fas fa-user"></i> <span class="clearfix d-none d-sm-inline-block icon">Sign in</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" target="_blank" [href]="exePath" download><i class="fas fa-download"></i> <span class="clearfix d-none d-sm-inline-block icon ">Tracker For Win.</span></a>
+      </li>
+      <li class="nav-item" >
+        <a class="nav-link" target="_blank" [href]="exePathMAC" download ><i class="fas fa-download"></i> <span class="clearfix d-none d-sm-inline-block icon">Tracker MAC.</span></a>
+      </li>
+    </ul>
+    
+  </nav>
+</header>
+
+<style>
+  .icon {
+    margin-left: 3px
+  }
+  .headerColor {
+    background-color: #cfd7e7;
+  }
+  .headar:hover {
+    color:#c29090 !important;
+  }
+  nav a:hover { color:#c29090 !important; }
+
+  </style>
+

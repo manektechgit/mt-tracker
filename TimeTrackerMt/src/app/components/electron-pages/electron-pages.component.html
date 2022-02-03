@@ -1,0 +1,8 @@
+<div class="sidenav-electron">
+  <a  href="javascript:void(0);">{{currentLoginUser?.FirstName}}</a>
+  <a href="javascript:void(0);" class="electron-bottom-logout" (click)="Logout()"><i class="fa fa-sign-out-alt"></i></a>
+  <!-- <a href="javascript:void(0);" class="electron-bottom-setting"><i routerLink="setting" routerLinkActive="router-link-active"  class="fa fa-cog"></i></a> -->
+</div>
+<div class="main-electron">
+  <router-outlet></router-outlet>
+</div>

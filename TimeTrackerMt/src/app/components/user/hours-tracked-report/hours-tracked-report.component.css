@@ -1,0 +1,32 @@
+
+
+.selecter {
+  margin-left: 2px;
+  width: 200px
+}
+.initialTabs {
+    margin-left: 512px;
+    width: 449px;
+    padding: 0px;
+    margin-top: -38px;
+}
+.menuDetail {
+  margin-left: 11px
+}
+
+::ng-deep.div-pro {
+  width: 90%;
+  padding-top: 5px;
+}
+
+::ng-deep.progress-htr .progress , .progress-htr {
+  border-radius: 0px;
+  height: 16px;
+}
+
+  .cal-m{
+    margin-left: 40px;
+  }
+
+
+

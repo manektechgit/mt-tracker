@@ -1,0 +1,77 @@
+<div class="card">
+  <div class="row">
+    <div class="col-lg-10">
+      <div class="d-sm-flex justify-content-between">
+        <div class="userinfo">
+          <form class="form_common_style" (ngSubmit)="onSubmit()" name="CompanyForm" [formGroup]="CompanyForm">
+            <div class="row">
+              <div class="col-12">
+                <label>Company name</label>
+                <input formControlName="CompanyName" name="CompanyName" id="inputCompanyName"
+                  class="form-control form-input ng-pristine ng-invalid ng-touched" placeholder="Company name" >
+                <div class="text-danger"
+                  *ngIf="f.CompanyName.invalid && (f.CompanyName.dirty || f.CompanyName.touched || isSubmit)">
+                  <span *ngIf="f.CompanyName.errors.required">
+                    Please enter company name
+                  </span>
+                  <span class="text-danger" *ngIf="IsError == true">
+                    Company name already exists!
+                   </span>
+                </div>
+                <span *ngIf="f.CompanyName.errors?.pattern" class="text-danger">
+                  Special characters and number are not allowed
+                </span>
+              </div>
+
+              <div class="col-12">
+                <label>Number of user</label>
+                <input type="number" formControlName="NumberOfUser" name="NumberOfUser" id="inputNumberOfUser" min="0"
+                  class="form-control form-input ng-pristine ng-invalid ng-touched" placeholder="Number of user" (input)="checkValue($event)">
+                <div class="text-danger"
+                  *ngIf="f.NumberOfUser.invalid && (f.NumberOfUser.dirty || f.NumberOfUser.touched || isSubmit)">
+                  <span *ngIf="f.NumberOfUser.errors.required">
+                    Please enter number of user
+                  </span>
+                </div>
+              </div>
+              <div class="col-12">
+                <label>Company Url</label>
+                <input type="url" formControlName="CompanyURL" name="CompanyUrl" id="inputCompanyUrl"
+                  class="form-control form-input ng-pristine ng-invalid ng-touched" placeholder="Company url">
+                <div class="text-danger"
+                  *ngIf="f.CompanyURL.invalid && (f.CompanyURL.dirty || f.CompanyURL.touched || isSubmit)">
+                  <span *ngIf="f.CompanyURL.errors.required">
+                    Please enter company url
+                  </span>
+                  <span *ngIf="f.CompanyURL.errors?.pattern">
+                    Url should begin with http:// or https://
+                  </span>
+
+                </div>
+              </div>
+              <div class="col-12 mt-3">
+                <button class="btn submit-btn" style="margin: 3px;" type="submit">Save</button> &nbsp;
+                <button class="btn cancel-btn" style="margin: 3px;" type="button"
+                  (click)="onSaveOrCancel('cancel')">Cancel</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

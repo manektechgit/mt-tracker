@@ -1,0 +1,24 @@
+
+      <div class="table-responsive">
+      <p-table [columns]="ReportsDetailsList" [value]="ReportsDetailsList" id="UserDetail" selectionMode="multiple"  #dt styleClass="p-datatable-sm" [lazy]="true"
+        [globalFilterFields]="['CalendarDay','DayName']" >
+        <ng-template pTemplate="caption">
+          User - Report
+         <!-- <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success "  pTooltip="XLS" tooltipPosition="bottom"></button> -->
+
+        </ng-template>
+        <ng-template pTemplate="header">
+                <tr>
+                  <th width="15%" >CalendarDay</th>
+                  <th width="15%">DayName</th>
+                  <th *ngFor="let item of GetUserDetailslist;">{{item.FirstName}}</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-product >
+                <tr>
+                  <td> {{product.CalendarDay}}</td>
+                  <td> {{product.DayName}}</td>
+                  <td *ngFor="let data of GetUserDetailslist"> {{product[data.FirstName] != null ? removeZero(product[data.FirstName]) : '0'}} </td>
+                </ng-template>
+              </p-table>
+            </div>

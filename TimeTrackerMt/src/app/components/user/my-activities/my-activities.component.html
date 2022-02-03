@@ -1,0 +1,81 @@
+<div class="table-responsive">
+  <p-table [value]="MyActivitiesDetails" #dt styleClass="p-datatable-sm" sortField="Date" sortMode="single"
+    (onSort)="onSort()" dataKey="Date" sortField="Date" sortOrder="-1">
+    <ng-template pTemplate="caption">
+      MyActivity
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th width="30%">Date/Time </th>
+        <th width="30%">Duration</th>
+        <th width="30%">User</th>
+        <th width="30%">Project name</th>
+        <th width="30%">Task name</th>
+        <th width="30%">Screenshots</th>
+        <th width="30%">Image count</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-ActivityLog let-rowIndex="rowIndex" let-expanded="expanded">
+      <tr *ngIf="rowGroupMetadata[ActivityLog.Date].index === rowIndex">
+        <td colspan="7">
+          <button type="button" pButton pRipple [pRowToggler]="ActivityLog"
+            class="p-button-text p-button-rounded p-button-plain p-mr-2"
+            [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+          <span class="p-text-bold p-ml-2">{{ActivityLog.Date | date:'MMM d'}}</span>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="rowexpansion" let-ActivityLog>
+      <tr>
+        <td class="TimeFormate">
+          {{ActivityLog.InTime}} - {{ActivityLog.OutTime}}
+        </td>
+        <td>
+          {{ActivityLog.Minutes}}
+        </td>
+        <td>
+          {{ActivityLog.Name}}
+        </td>
+        <td>
+          {{ActivityLog.ProjectName}}
+        </td>
+        <td>
+          {{ActivityLog.TaskName}}
+        </td>
+        <td>
+          <button pButton type="button" label="Screen Shots" (click)="GetLogImages(ActivityLog,content,nodata)"></button>
+        </td>
+        <td>
+          {{ActivityLog.ImageCount}}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Screen log</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-user-screen-log #screenlog [ProjectId]="LogDetail.ProjectId" [fromtime]="LogDetail.InTime"
+      [totime]="LogDetail.OutTime" [Sdate]="LogDetail.Date" [UserId]="LogDetail.UserId"></app-user-screen-log>
+  </div>
+  <!-- <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div> -->
+</ng-template>
+
+<ng-template #nodata let-modal>
+  <div class="modal-header">
+    <h1 class="modal-title">No Screen Shot Available</h1>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <!-- <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div> -->
+</ng-template>

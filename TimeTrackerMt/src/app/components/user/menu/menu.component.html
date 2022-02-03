@@ -1,0 +1,135 @@
+<!-- <div class="container-fluid"> -->
+  <div class="card">
+    <div class="row top-bar">
+      <div class="col-lg-8">
+      </div>
+    </div>
+    <p-toolbar styleClass="p-mb-2">
+      <ng-template pTemplate="left">
+          <form class="form-Menu" name="MenuForm" [formGroup]="MenuForm">
+                <label>Select Role</label>
+                <select (change)="onRoleChange($event.target.value)" class="form-control" formControlName="RoleId"
+                  name="RoleId">
+                  <option [ngValue]=null disabled>-- Select --</option>
+                  <option *ngFor="let dropdown of RolesDropdownList" [value]="dropdown.RoleId">
+                    {{dropdown.RoleName}}
+                  </option>
+                </select>
+          </form>
+      </ng-template>
+    </p-toolbar>
+    <br>
+    <p-table [value]="menulist" #dt styleClass="p-datatable-sm" [lazy]="true" (onLazyLoad)="loadMenuData($event)"
+      [paginator]="false" >
+      <ng-template pTemplate="caption">
+        Manage Menu
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th width="30%" >Menu name </th>
+          <th width="10%">Active</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td>{{product.Menuname}}</td>
+          <td>
+            <div class="custom-switch" style="display: grid;">
+              <input type="checkbox" class="custom-control-input" id="{{product.id}}" [(ngModel)]="product.is_active"
+                (click)="onChange($event.target.checked,product)">
+              <label class="custom-control-label" for="{{product.id}}" style="margin-bottom: 15px;"></label>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <!-- </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container-fluid">
+  <div class="row top-bar">
+    <div class="col-lg-8">
+      <div class="d-flex align-items-center justify-content-between">
+        <ul class="breadcrumbs">
+          <li><a [routerLink]="['/user']" title="Home">Dashboard</a></li>
+          <li><span>Menu</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card shadow mb-4">
+        <div class="col-lg-6 mx-auto">
+          <form class="form-Menu" name="MenuForm" [formGroup]="MenuForm">
+            <div class="Part1">
+              <div class="form-label-group">
+                <label>Select Role</label>
+                <select (change)="onRoleChange($event.target.value)" class="form-control" formControlName="RoleId"
+                  name="RoleId">
+                  <option [ngValue]=null disabled>-- Select --</option>
+                  <option *ngFor="let dropdown of RolesDropdownList" [value]="dropdown.RoleId">
+                    {{dropdown.RoleName}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="list_box">
+          <div class="list_box_inn ">
+            <div class="d-md-flex flex-md-wrap justify-content-md-start">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">S.no</th>
+                    <th scope="col">Menu name</th>
+                    <th scope="col">Active</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of menulist ;  let i=index">
+                    <th style="width: 50px;">{{i+1}}</th>
+                    <td> {{item.Menuname}}</td>
+                    <td>
+                      <div class="custom-switch" style="display: grid;">
+                        <input type="checkbox" class="custom-control-input" id="{{i}}" [(ngModel)]="item.is_active"
+                          (click)="onChange($event.target.checked,item)">
+                        <label class="custom-control-label" for="{{i}}"></label>
+                      </div>
+                    </td>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

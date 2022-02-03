@@ -1,0 +1,53 @@
+.custom-day {
+    text-align: center;
+    padding: 0.185rem 0.25rem;
+    display: inline-block;
+    height: 2rem;
+    width: 2rem;
+  }
+  .custom-day.focused {
+    background-color: #e6e6e6;
+  }
+  .custom-day.range, .custom-day:hover {
+    background-color: rgb(2, 117, 216);
+    color: white;
+  }
+  .custom-day.faded {
+    background-color: rgba(2, 117, 216, 0.5);
+  }
+  .p-button-success{
+    float: right;
+    height: 30px; 
+  }
+  
+  .card.DateRange.p-calendar .p-inputtext {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    width: 1%;
+    width: 363px;
+  }
+  ::ng-deep.p-calendar{
+    min-width: 244px;
+  }
+  ::ng-deep.p-multiselect-label.ng-tns-c168-1{
+    width: 180px;
+  }
+  .itemLbl{
+    display: block;
+  }
+  .box-main{
+    margin-right:15px;
+  }
+  ::ng-deep.UserMain .p-multiselect{
+   min-width: 220px;
+  }
+  ::ng-deep.p-datatable.p-datatable-sm .p-datatable-thead > tr > th{
+    width: 120px;
+  }
+  ::ng-deep .p-datatable-wrapper{
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }

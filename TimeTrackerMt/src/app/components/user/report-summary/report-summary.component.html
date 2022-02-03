@@ -1,0 +1,21 @@
+
+    <p-table [value]="ReportSummeryDetails"  #dt styleClass="p-datatable-sm" [lazy]="true">
+      <ng-template pTemplate="caption">
+        Report Summary
+        <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success "  pTooltip="XLS" tooltipPosition="bottom"></button>
+
+      </ng-template>
+      <ng-template pTemplate="header">
+              <tr>
+                <th width="90%">User name</th>
+                <th style="width: 2px;" >Total</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-product >
+              <tr>
+                <td> {{product.FirstName}}</td>
+                <td> {{product.Total}}</td>
+              </ng-template>
+            </p-table>
+
+

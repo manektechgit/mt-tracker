@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col-lg-10">
+    <div class="card admin-profile bg-light shadow mb-4">
+      <div class="d-sm-flex justify-content-between">
+        <div class="userinfo">
+          <form class="form_common_style" (ngSubmit)="onSubmit()" name="ProjectForm"
+            [formGroup]="ProjectForm">
+            <div class="row">
+              <div class="col-12">
+                <label>Name<span>*</span></label>
+                <input type="text" formControlName="Name" class="form-control form-input"
+                  placeholder="Enter project name">
+                <div class="text-danger" *ngIf="f.Name.invalid && (f.Name.dirty || f.Name.touched || isSubmit)">
+                  <span *ngIf="f.Name.errors.required">
+                    Please enter project name
+                  </span>
+                </div>
+                <span *ngIf="f.Name.errors?.pattern" class="text-danger">
+                  Special characters and number are not allowed
+                </span>
+              </div>
+              <div class="col-12 mt-3">
+                <label>Department<span>*</span></label>
+                <select class="form-control form-input" formControlName="DepartmentId" name="DepartmentId" required>
+                  <option [ngValue]=null>-- Select --</option>
+                  <option *ngFor="let dropdown of dropDownDepartment" [ngValue]="dropdown.DepartmentId">
+                    {{dropdown.DepartmentName}}
+                  </option>
+                </select>
+                <div class="text-danger" *ngIf="f.DepartmentId.invalid && (f.DepartmentId.dirty || f.DepartmentId.touched || isSubmit)">
+                  <span *ngIf="f.DepartmentId.errors.required">
+                    Please select department name
+                  </span>
+                </div>
+              </div>
+              <div class="col-12 mt-3">
+                <label>Status<span>*</span></label>
+                <select class="form-control form-input" formControlName="StatusId" name="StatusId" required>
+                  <option [ngValue]=null>-- Select --</option>
+                  <option *ngFor="let dropdown of dropDownStatus" [ngValue]="dropdown.StatusId">
+                    {{dropdown.Name}}
+                  </option>
+                </select>
+                <div class="text-danger" *ngIf="f.StatusId.invalid && (f.StatusId.dirty || f.StatusId.touched || isSubmit)">
+                  <span *ngIf="f.StatusId.errors.required">
+                    Please select status
+                  </span>
+                </div>
+              </div>
+
+
+              <div class="col-12 mt-3">
+                <button class="btn submit-btn" style="margin: 3px;" type="submit" title="Save">Save</button> &nbsp;
+                <button class="btn cancel-btn" style="margin: 3px;" type="button" (click)="onSaveOrCancel('cancel')" title="Cancel">Cancel</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

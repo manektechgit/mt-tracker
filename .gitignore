@@ -1,0 +1,10 @@
+node_modules
+/TimeTrackerMt_Api/.vs
+obj
+bin
+/TimeTrackerMt/src/assets/mt-tracker-1.0.0.dmg
+/TimeTrackerMt/src/assets/mt-tracker-1.0.0.dmg.zip
+/TimeTrackerMt/src/assets/mt-tracker.exe
+release
+user_screenshot
+Logs
